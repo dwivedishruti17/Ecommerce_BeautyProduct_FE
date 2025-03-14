@@ -1,0 +1,14 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  /* font-size: 3rem; */
+  margin: auto;
+  max-width: 1350px;
+  margin-top: 10px;
+}
+.cart-wrapper{
+  width: 1800px;
+  margin-left: 50px;
+}
