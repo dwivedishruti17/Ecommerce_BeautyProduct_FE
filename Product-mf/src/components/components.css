@@ -1,0 +1,32 @@
+.subcategory-item {
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .subcategory-item:hover {
+    transform: scale(1.05);
+  }
+  
+  .subcategory-img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+  }
+  
+  
+  .subcategory-name {
+    margin-top: 8px;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .custom-button{
+    background-color: #FF407D;
+    color: white;
+    border: none;
+    font-size: 14px;
+    height: 38px;
+  }
