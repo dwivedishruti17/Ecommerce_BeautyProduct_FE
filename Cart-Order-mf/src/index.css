@@ -8,17 +8,26 @@ body {
   max-width: 100px;
   margin-top: 5px;
 }
+
+
 .btn-custom {
   background-color: #FF407D;
-  color: white;
-  border: none;
-  /* font-size: 14px; */
+    color: white;
+    border: none;
+    
 }
-
-
-.btn-custom:hover {
+.btn-custom:hover, active {
   background-color: #ff40a6;
 }
+
+
+
 .cart-wrapper{
   width: 1000px;
+}
+
+.address-container{
+  height: 450px;
+  margin-bottom: 50px;
+  padding-bottom: 50px;
 }

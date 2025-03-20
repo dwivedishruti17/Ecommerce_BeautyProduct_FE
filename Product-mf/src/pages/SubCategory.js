@@ -32,7 +32,7 @@ const SubCategory = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div>
+    <div className="container" style={{marginBottom:"200px"}}>
       <h2>{category?.name}</h2>
       <ul>   
         <SubCategoryList subcategories={category?.subcategories || []} />

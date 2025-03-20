@@ -30,3 +30,6 @@
     font-size: 14px;
     height: 38px;
   }
+  .custom-button:hover {
+    background-color: #ff4093; 
+  }

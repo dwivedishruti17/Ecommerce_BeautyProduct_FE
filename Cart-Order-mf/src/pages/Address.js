@@ -8,12 +8,17 @@ import { BiTrophy } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { createOrder } from "../api/CartAndOrderApi";
 // import logo from "./Assets/orderconfirm.png";
+import { FaRegTrashAlt } from "react-icons/fa";
+import { deleteaddress } from "../api/CartAndOrderApi";
+import AddAddress from "../components/AddAddress";
+import { ToastContainer, toast } from 'react-toastify';
 
 const Address = () => {
     const [selectedAddress, setSelectedAddress] = useState(null);
     const [cartItems, setCartItems] = useState({ items: [] });
     const [show, setShow] = useState(false);
     const [addresses, setAddresses] = useState([]);
+    const[loading, setLoading] = useState(false);
     const[orderdata, setOrderData]= useState({
       addressId:null
     })
@@ -80,8 +85,8 @@ useEffect(()=>{
             console.log("error in adding address");
         }
     }
-
-    const shippingCharge = 5;
+    
+   const shippingCharge = 5;
    let subtotal = 0;
 
    if (cartItems && cartItems.items && Array.isArray(cartItems.items)) {
@@ -94,17 +99,31 @@ useEffect(()=>{
        console.error('Error in fetching cart', cartItems);
    }
 
+   const handleDelete = async (addressId) => {
+    try {
+      await deleteaddress(addressId);
+      setAddresses(addresses.filter(addr => addr.id !== addressId));
+    } catch (error) {
+      console.error("Failed to delete address:", error);
+    }
+  };
+
+
    const handlePlaceOrder = async(e) =>{
     e.preventDefault();
      try{
+       setLoading(true);
       console.log("Current orderdata:", orderdata);
       if(orderdata.addressId==null){
         console.log("add address for placing an order");
       }
       await createOrder(orderdata);
- 
+        navigate("/cart/orderconfirm");
+       
+    
      }
      catch(error){
+      toast("Please Select Address")
       console.error("error in placing order : ", error);
      }
    }
@@ -116,29 +135,16 @@ useEffect(()=>{
     }));
 };
 
-// Call updateAddressId with the selected addressId
 const handleAddressSelection = (selectedAddressId) => {
   setSelectedAddress(selectedAddressId);
     updateAddressId(selectedAddressId);
 };
 
-  //  const handleSelectAddress = async (id) => {
-  //   setSelectedAddress(id);
-  //   setOrderData({ addressId: id });
+  if(loading) return <div className="container">Loading...</div>
 
-  //   try {
-  //     const orderResponse = await createOrder({ addressId: id });
-  //     console.log("Order created successfully:", orderResponse);
-  //     // Handle successful order creation (e.g., navigate to order confirmation page)
-  //   } catch (error) {
-  //     console.error("Error creating order:", error);
-  //     // Handle error (e.g., show error message to the user)
-  //   }
-  // };
-
-  
     return (
-     <div class="container">
+      
+     <div class="container" style={{marginBottom:"20px"}}>
         {/* <ProgressBar now={50} variant="danger" animated label="Checkout" className="mb-4" /> */}
         <h2><strong>Choose Address</strong></h2>
         <p class="text-muted">Detailed address will help our delivery partner reach your doorstep quickly</p>
@@ -157,11 +163,15 @@ const handleAddressSelection = (selectedAddressId) => {
                       <div className="d-flex"><p className="mb-1 text-muted">{addr.city}-{addr.pincode}</p></div>
                       <p>{addr.phone}</p>
                         </div>
+                       
+                       <div className=" g-2">
                         <Button 
                           style={selectedAddress === addr.id ? {backgroundColor:"#FF406D", borderColor:"#FF406D"} : {color:"#FF406D", borderColor:"#FF406D", backgroundColor:"white"}} 
                           onClick={() => handleAddressSelection(addr.id)}>
                           {selectedAddress === addr.id ? "Selected" : "Select"}
                         </Button>
+                        <span onClick={() => handleDelete(addr.id)}> <FaRegTrashAlt style={{color:"#FF407D", cursor:"pointer"}}/></span>
+                         </div>
                       </div>
                     </Card.Body>
                   </Card>
@@ -171,66 +181,13 @@ const handleAddressSelection = (selectedAddressId) => {
                 </Button>
                 <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Add New Address</Offcanvas.Title>
+          <Offcanvas.Title>Add New Address</Offcanvas.Title>  
           
         </Offcanvas.Header>
         <Offcanvas.Body>
-         <form action="" onSubmit={handleAddAddress}>
-      <div class="form-group col-md-4">
-      <label for="pincode">Zip</label>
-      <input type="text" 
-      class="form-control bg-light"
-       id="pincode"
-        placeholder="pincode"
-        value={addressData.pincode}
-        onChange={handleChange}
-        required/>
-    </div>
-  <div class="form-group">
-    <label for="area">Address</label>
-    <input type="text"
-     class="form-control w-75 bg-light"
-      id="area" 
-      placeholder="Address"
-      value={addressData.area}
-      onChange={handleChange}
-      required/>
-  </div>
+        
+<AddAddress handleAddAddress={handleAddAddress} handleChange={handleChange}/>
 
-  <div class="form-row">
-    <div class="form-group d-flex mt-3 g-3">
-    <span><label for="city">City</label>
-    <input type="text" 
-    class="form-control bg-light"
-     id="city"
-      placeholder="city"
-      value={addressData.city}
-      onChange={handleChange}
-      required/></span>  
-<span> <label for="state">State</label>
-<input id="state"
- class="form-control bg-light" 
- placeholder="state"
- value={addressData.state}
- onChange={handleChange}
- required/></span>
-     
-    </div>
-      
-    </div>
-    <div className="form-group col-md-5">
-        <label for="phone">Contact</label>
-    <input id="phone"
-     placeholder="contact" 
-     class="bg-light form-control"
-     value={addressData.phone}
-     onChange={handleChange}
-     required/>
-    
-  </div>
-
-  <button type="submit" class="btn btn-custom mt-3 w-100" >Add Address</button>
-</form>
         </Offcanvas.Body>
       </Offcanvas>
               </Card.Body>
@@ -239,7 +196,6 @@ const handleAddressSelection = (selectedAddressId) => {
           <Col md={6}>
           <img src="https://adn-static1.nykaa.com/media/wysiwyg/Payments/desktop-icons/header-address.svg"/>
             <Accordion>
-             
               <Accordion.Item eventKey="0">
                 <Accordion.Header style={{color:"#FF406D"}}>Cart Items ({cartItems.items.length})</Accordion.Header>
                 <Accordion.Body>
@@ -274,6 +230,9 @@ const handleAddressSelection = (selectedAddressId) => {
             </Accordion>
             
             <Button className="mt-4 w-100 btn-custom" onClick={handlePlaceOrder}>Proceed to Payment</Button>
+            <ToastContainer style={{color:"#FF407D"}} 
+                autoClose={2000}
+                /> 
           </Col>
         </Row>
         </div>

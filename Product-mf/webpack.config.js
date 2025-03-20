@@ -57,6 +57,14 @@ module.exports = (_, argv) => ({
           loader: "babel-loader",
         },
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
     ],
   },
 
@@ -64,9 +72,13 @@ module.exports = (_, argv) => ({
     new ModuleFederationPlugin({
       name: "Product_mf",
       filename: "remoteEntry.js",
-      remotes: {},
+      remotes: {
+         User_mf:"User_mf@http://localhost:3000/remoteEntry.js",
+         Cart_Order_mf:"Cart_Order_mf@http://localhost:3002/remoteEntry.js"
+      },
       exposes: {
         "./Product": "./src/ProductNavigations.jsx",
+        "./ProductCard":"./src/components/ProductCard.js"
       },
       shared: {
         ...deps,

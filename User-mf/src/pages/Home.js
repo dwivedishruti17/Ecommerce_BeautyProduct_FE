@@ -1,10 +1,38 @@
 import React from "react";
-import Navbar from "../components/Navbar";
+// import Navbar from "../components/Navbar";
 import { Carousel } from  "react-bootstrap"
+import { fetchTopProducts } from "../api/UserApi";
+import {useEffect, useState} from "react";
+import ProductCard from "Product_mf/ProductCard";
 
 const Home = () =>{
+  const[products, setProducts]=useState([]);
+  const [filters, setFilters] = useState({
+    minPrice: "",
+    maxPrice: "",
+    name: "",
+    order: "asc",
+    sortBy: "price"
+});
+    useEffect(()=>{
+      const fetchProduct = async()=>{
+        try{
+          const data = await fetchTopProducts(filters);
+          setProducts(data);
+          console.log("dataa", data);
+          console.log("home page product data", products);
+        }
+        catch(error){
+          console.log("cannot fetch error", error);
+        }
+      }
+      fetchProduct();
+    },[]);
+
+
     return(
-        
+      <div>
+        {/* <Navbar/> */}
         <Carousel>
         <Carousel.Item>
           <img
@@ -28,6 +56,13 @@ const Home = () =>{
           />
         </Carousel.Item>
       </Carousel>
+      <div className="align-items-center" style={{marginLeft:"70px", marginTop:"10px"}}>
+        <h2 style={{color:"#FF407D"}}><strong>What's new?</strong></h2>
+      <ProductCard products={products} isWishlist={false}/>
+      </div>
+      
+     
+      </div>
     
     );
     

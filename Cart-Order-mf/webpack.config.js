@@ -76,6 +76,8 @@ module.exports = (_, argv) => ({
       exposes: {
 
         "./Cart": "./src/CartAndOrderNavigations.jsx",
+        "./Sidebar":"./src/components/Sidebar.js",
+        "./AddAddress":"./src/components/AddAddress.js"
       },
       shared: {
         ...deps,

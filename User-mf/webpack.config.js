@@ -77,7 +77,7 @@ module.exports = (_, argv) => ({
          Cart_Order_mf:"Cart_Order_mf@http://localhost:3002/remoteEntry.js"
       },
       exposes: {
-        // "Navbar":"./src/components/Navbar.js"
+        "./Navbar":"./src/components/Navbar.js"
       },
       shared: {
         ...deps,

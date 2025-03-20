@@ -34,6 +34,9 @@ const getToken = () => {
       throw error;
     }
   };
+
+
+
    export const addAddress = async(addressdata) =>{
     try{
        const token = getToken();
@@ -77,7 +80,41 @@ const getToken = () => {
       console.error("Error in fetching orders:", error);
       throw error;
     }
+   };
+
+   export const deleteaddress = async(addressId) =>{
+    try{
+      const token = getToken();
+      if(!token){
+        throw new Error("Authentication token not found");
+      }
+     await axios.delete(`${API_USER_URL}/address/${addressId}`, token);
+    }
+    catch(error){
+      console.error("Error in deleting the address: ", error);
+      throw error;
+    }
    }
+
+   export const updateOrderStatus = async(orderId, orderStatus) =>{
+    try{
+      const token = getToken();
+      if(!token){
+        throw new Error("Authentication token not found");
+      }
+      const payload = {orderStatus};
+      console.log("this is paloadd: " , payload);
+      const response = await axios.put(`${API_ORDER_URL}/${orderId}/status`,payload ,token)
+       console.log("updated status data: ", response.data);
+      return response.data;
+    }
+    catch(error){
+      console.error("Error in updating order status :", error);
+      throw error;
+    }
+   }
+
+
   export const fetchAddress = async()=>{
     try{
         const token = getToken();
@@ -121,6 +158,18 @@ const getToken = () => {
     catch(error){
         console.error("Error in deleting cart item", error);
         throw error;
+    }
+  }
+
+  export const getAllOrder = async() =>{
+    try{
+      const token = getToken();
+      const response = await axios.get(`${API_ORDER_URL}/all`, token);
+      return response.data;
+    }
+    catch(error){
+      console.error("Error in fetching all orders:", error);
+      throw error;
     }
   }
 

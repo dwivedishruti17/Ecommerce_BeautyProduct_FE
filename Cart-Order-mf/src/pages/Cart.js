@@ -6,6 +6,7 @@ import axios from 'axios';
 import { updateCartQuantity } from "../api/CartAndOrderApi";
 import { deleteCartItem } from "../api/CartAndOrderApi";
 import { useNavigate } from "react-router-dom";
+import cartlogo from "./Assets/cartlogo.png";
 
 const Cart = () => {
    const [cart, setCart] = useState({ items: [] });
@@ -67,24 +68,24 @@ const Cart = () => {
                subtotal += item.price * item.quantity;
            }
        });
+       
    } else {
        console.error('Error in fetching cart', cart);
    }
 
-   // let discount=0;
-
-   // const discount = cart.reduce((sum, item) => sum + (item.price * item.quantity * (item.discount / 100)), 0);
-
-
-   // const shipping = cart.length > 0 ? 5.0 : 0;
-   // const total = subtotal - discount + shipping;
+   let totalAmount = 0;
+   if(subtotal<599){
+     totalAmount=150+subtotal
+   }
   
    return (
      <div className="container bg-light py-4">
        {cart?.items?.length === 0 ? (
             <div className="text-center">
-                <h4>Your cart is empty</h4>
-                <p>Add items to your cart to see them here.</p>
+                <h4><strong>Your Shopping Bag is empty</strong></h4>
+                <p>This feels too light! Go on, add all your favourites</p>
+                <img src={cartlogo} style={{width:"300px"}}/>
+                <div><Button className="btn-custom" onClick={()=>navigate("/")}>Start Shopping</Button></div>
             </div>
         ) :(
          <Row className="g-4">
@@ -92,7 +93,7 @@ const Cart = () => {
             <Col lg={8}>
              <div className="d-flex justify-content-between align-items-center mb-4">
                <h4>Shopping Cart</h4>
-               {/* <span className="text-muted">{cart.length} items</span> */}
+             
              </div>
              {cart?.items?.map(item => (
        <Card key = {item.productId} className="p-3 shadow-sm mb-3">
@@ -101,9 +102,8 @@ const Cart = () => {
    <img src={item?.imageUrl} alt={item?.name} className="product-image" style={{ width: '100px', height: '100px' }} />
                    </Col>
                    <Col md={4}>
-       {/* <h6> {item?.productId}</h6> */}
+      
                       <p className="text-muted mb-1">{item?.description}</p>
- {/* {item.discount > 0 && <span className="badge bg-success"> {item.discount}% OFF</span>}  */}
                     </Col>
                    <Col md={3} className="d-flex align-items-center gap-2">
  <Button variant="light " size="sm" onClick={()=>updateQuantity(item.productId, -1)}>-</Button>
@@ -121,7 +121,7 @@ const Cart = () => {
              ))}
            </Col> 
   
-           {/* Order Summary */}
+          
             <Col lg={4}>
              <Card className="p-4 shadow-sm">
                <h5>Order Summary</h5>
@@ -129,23 +129,17 @@ const Cart = () => {
                  <span className="text-muted">Subtotal</span>
                  <span>₹{subtotal.toFixed(2)}</span>
                </div>
-               {/* <div className="d-flex justify-content-between mb-2">
-                 <span className="text-muted">Discount</span>
-                 <span className="text-success">-${discount.toFixed(2)}</span>
-               </div>  */}
+              
                 <div className="d-flex justify-content-between mb-2">
                  <span className="text-muted">Shipping</span>
-                 <span>₹0.00</span>
+                 <span>{subtotal.toFixed(2)>599?"FREE":"₹150"}</span>
                </div>
                <hr />
                <div className="d-flex justify-content-between mb-3">
                  <strong>Total</strong>
-                 <strong>₹{subtotal.toFixed(2)}</strong>
+                 <strong>₹{totalAmount}</strong>
                </div>
-               {/* <InputGroup className="mb-3">
-                 <Form.Control type="text" placeholder="Promo code" value={promoCode} onChange={(e) => setPromoCode(e.target.value)} />
-                 <Button variant="outline-secondary">Apply</Button>
-               </InputGroup> */}
+              
                <Button className="w-100 btn-custom" onClick={()=>{handleNavigate("/cart/address")}} >Proceed to Checkout</Button>
                <div className="text-center mt-2 d-flex justify-content-center gap-2"> 
                  {/* <BiShieldCheck className="text-success" /> <small className="text-muted">Secure checkout</small> */}
