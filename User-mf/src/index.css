@@ -16,3 +16,54 @@ html, body{
   max-width: 100%;
   overflow-x: hidden;
 }
+
+
+.top-bar {
+  background: linear-gradient(to right, #ddd6f3, #faaca8);
+  height: 100px;
+  padding: 0 20px;
+}
+ 
+.logo {
+  width: 120px;
+}
+ 
+.small-logo {
+  width: 70px;
+}
+ 
+.tagline {
+  font-family: 'Lobster', cursive;
+  color: #FF407D;
+  margin-left: 10px;
+}
+ 
+.btn-custom {
+  background-color: #FF407D;
+  color: white;
+  border: none;
+  /* font-size: 14px; */
+}
+
+.btn-custom:hover {
+  background-color: #ff40a6;
+}
+ 
+.custom-navbar {
+  background-color: white;
+ 
+}
+ 
+.nav-hover {
+  font-size: 14px;
+  transition: color 0.3s;
+}
+ 
+.nav-hover:hover {
+  color: #FF407D !important;
+}
+ 
+.search-box {
+  font-size: 14px;
+  width: 200px;
+}

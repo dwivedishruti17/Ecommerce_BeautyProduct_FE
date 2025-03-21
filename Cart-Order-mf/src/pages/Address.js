@@ -18,7 +18,7 @@ const Address = () => {
     const [cartItems, setCartItems] = useState({ items: [] });
     const [show, setShow] = useState(false);
     const [addresses, setAddresses] = useState([]);
-    const[loading, setLoading] = useState(false);
+    // const[loading, setLoading] = useState(false);
     const[orderdata, setOrderData]= useState({
       addressId:null
     })
@@ -35,14 +35,9 @@ const Address = () => {
   const handleShow = () => setShow(true);
   const navigate = useNavigate();
 
-  const handleNavigate = (path) => {
-    console.log(`Navigating to ${path}`);
-    navigate(path);
-  };
 
-    
-useEffect(()=>{
-    async function fetchUserAddress()
+
+  const fetchUserAddress = async()=>
     {
         try{
             const data = await fetchAddress();
@@ -52,6 +47,8 @@ useEffect(()=>{
             console.error("failed to load address: ",  error);
         }
     }
+useEffect(()=>{
+   
     fetchUserAddress();
 }, []);
 
@@ -78,7 +75,7 @@ useEffect(()=>{
             await addAddress(addressData);
             console.log("add adresss krooooo");
             setShow(false);
-            addresses();
+            fetchUserAddress();
     
         }
         catch{
@@ -112,7 +109,7 @@ useEffect(()=>{
    const handlePlaceOrder = async(e) =>{
     e.preventDefault();
      try{
-       setLoading(true);
+      //  setLoading(true);
       console.log("Current orderdata:", orderdata);
       if(orderdata.addressId==null){
         console.log("add address for placing an order");
@@ -140,7 +137,6 @@ const handleAddressSelection = (selectedAddressId) => {
     updateAddressId(selectedAddressId);
 };
 
-  if(loading) return <div className="container">Loading...</div>
 
     return (
       

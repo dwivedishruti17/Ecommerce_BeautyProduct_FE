@@ -16,7 +16,7 @@ const OrderConfirm = () =>{
     />  
         <img src={logo} style={{ width: "500px", height: "auto" }} />
         <div style={{ marginLeft: "65px", marginBottom: "30px" }}>
-          <Button className="btn-custom w-50" onClick={() => navigate("/product/allproduct")}>
+          <Button className="btn-custom w-50" onClick={() => navigate("/product/all")}>
             Continue Shopping
           </Button>
         </div>

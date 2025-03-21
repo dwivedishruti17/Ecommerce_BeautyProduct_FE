@@ -25,18 +25,6 @@ const AllProduct = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
  
-    // const fetchAllProducts = async () => {
-    //     try {
-    //         const data = await fetchProducts(filters);
-    //         setProducts(data);
-    //     } catch (error) {
-    //         console.log("Cannot fetch products");
-    //     }
-    // };
- 
-    // useEffect(() => {
-    //     fetchAllProducts();
-    // }, []);
 
 
     const fetchFilteredProd = async() =>{
@@ -59,24 +47,6 @@ const AllProduct = () => {
     }
 
     useEffect(()=>{
-        // const queryParam = new URLSearchParams(location.search);
-        // const name = queryParam.get("search");
-    //     async  function  fetchFilteredProd(){
-    //     let requestBody = {};
-    //     if (name) {
-    //       requestBody.name = name;
-    //       console.log("namee:", name);
-    //     }
-    //     if(name){
-    //     let response = await fetchProducts(requestBody);
-    //     setProducts(response);
-    //     }
-    //     else{
-    //         const data = await fetchProducts(filters);
-    //         setProducts(data);
-    //     }
-    //     console.log("response", response);  
-    // }
     fetchFilteredProd()
     console.log("location.search", location.search);
     }, [location.search]);
@@ -102,7 +72,6 @@ setFilters({ ...filters, [e.target.name]: e.target.value });
   handleFilterChange={handleFilterChange}
   applyFilters={applyFilters}
     />
-  
         {products.length > 0 ? (
           <ProductCard products={products} />
         ) : (

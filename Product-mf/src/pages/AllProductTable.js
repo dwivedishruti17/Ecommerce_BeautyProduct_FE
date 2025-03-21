@@ -36,8 +36,6 @@ const AllProductTable = () => {
     const validate = () => {
         const newErrors = {};
         if (!productData.name) newErrors.name = 'Name is required';
-        // if (!productData.selectedCat) newErrors.selectedCat = 'Category is required';
-        // if (!productData.subcategoryName) newErrors.subcategoryName = 'SubCategory is required';
         if (!productData.price) newErrors.price = 'Price is required';
         if (!productData.quantity) newErrors.quantity = 'Quantity is required';
         if (!productData.description) newErrors.description = 'Description is required';
@@ -85,16 +83,6 @@ const AllProductTable = () => {
     }
     setSelectedSubcat(''); 
     }
-
- 
-    // const handleFilterChange = (e) => {
-    //     setFilters({ ...filters, [e.target.name]: e.target.value });
-    //         };
-         
-    //         const applyFilters = () => {
-    //             fetchAllProducts();
-    //             handleClose();
-    //         };
  
   const handleShowModal = (product = { name: "", price: "", quantity: "" ,description:"", imageUrl:"", subcategoryName:"" }) => {
     setProductData(product);
@@ -126,8 +114,6 @@ if (e.target.name === 'subcategoryName') {
         handleCloseModal();
       }
     }
-
-      
     } catch (error) {
       console.error("Error saving product:", error);
     }
@@ -176,12 +162,12 @@ if (e.target.name === 'subcategoryName') {
               <td>{product.price}</td>
               <td>{product.quantity}</td>
               <td>{product.description}</td>
-              {/* <td><img src={product.imageUrl}/></td> */}
+              
               <td>
                 
-                {/* <Button size="sm"> */}
+                
                 <FaEdit  onClick={() => handleShowModal(product)} style={{color:"#FF407D"}} />
-                {/* </Button> */}
+             
                 <span onClick={()=>handleDelete(product.id)}><IoTrash style={{color:"#FF407D", marginLeft:"10px"}}/></span>
               </td>
             </tr>
@@ -215,21 +201,9 @@ value={productData.name}
               {category.name}
             </option>
           ))}
-           
-
+        
         </Form.Control>
       </Form.Group>
-      {/* <Form.Group className="mb-3">
-              <Form.Label>SubCategory Name</Form.Label>
-              <Form.Control
-                type="text"
-                name="subcategoryName"
-                value={productData.subcategoryName || productData.subcategoryId}
-                onChange={handleChange}
-                style={{borderColor:"#FF407D"}}
-              />
-              
-            </Form.Group> */}
                 <Form.Group>
         <Form.Label>SubCategory</Form.Label>
         <Form.Control as="select" value={productData.subcategoryName} onChange={handleChange} name="subcategoryName"  

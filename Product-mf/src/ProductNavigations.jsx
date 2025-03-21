@@ -2,7 +2,6 @@ import React from "react";
 import SubCategory from "./pages/SubCategory";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Product from "./pages/Product";
-import Test from "./pages/Test"
 import ProductDetails from "./pages/ProductDetails";
 import AllProduct from "./pages/AllProduct";
 import AllProductTable from "./pages/AllProductTable";
@@ -16,8 +15,8 @@ const ProductNavigations = () => {
         path="/products/:subcategoryId"
         element={<Product />}
       />
-      <Route path="/productDetail/:productId" element={<ProductDetails/>}/>
-      <Route path="/allproduct" element={<AllProduct/>}/>
+      <Route path="/:productId" element={<ProductDetails/>}/>
+      <Route path="/all" element={<AllProduct/>}/>
       <Route path="/table" element={<AllProductTable/>}/>
       <Route path="/wishlist" element={<WishList/>}/>
     </Routes>

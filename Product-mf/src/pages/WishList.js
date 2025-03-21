@@ -28,6 +28,13 @@ const WishList = () =>{
         fetchWishListItem();
     },[]);
 
+    const handleDelete = (productId) => {
+        setWishlist((prevWishlist) => ({
+          ...prevWishlist,
+          items: prevWishlist.items.filter((item) => item.productId !== productId),
+        }));
+      };
+   
 
 
     return(
@@ -56,7 +63,7 @@ const WishList = () =>{
                       </Col>
                     </Row>
                   </Container>):(
-                    <ProductCard products={wishlist?.items ||[]} isWishList={true} />
+                    <ProductCard products={wishlist?.items ||[]} isWishList={true} onDelete={handleDelete}/>
                 )
             }
            

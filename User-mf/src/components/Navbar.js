@@ -3,9 +3,7 @@ import { Button, Container } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { Navbar as BootstrapNavbar, Nav } from "react-bootstrap";
-import "./Navbar.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { BrowserRouter as Router, NavLink } from "react-router-dom";
 import logo from "./Assets/logobeauty.png";
 import { VscAccount } from "react-icons/vsc";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -39,7 +37,7 @@ const Navbar = () => {
   const handleSearch = (event) => {
     event.preventDefault();
     const searchQuery = searchInRef.current.value;
-    navigate(`product/allproduct?search=${searchQuery}`);
+    navigate(`product/all?search=${searchQuery}`);
   };
 
   const handleNavigate = (path) => {
@@ -121,7 +119,7 @@ const Navbar = () => {
                 <Nav.Link
                   className="nav-hover text-small"
                   onClick={() => {
-                    navigate("/product/allproduct");
+                    navigate("/product/all");
                   }}
                 >
                   All product

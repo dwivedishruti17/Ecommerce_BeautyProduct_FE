@@ -11,18 +11,18 @@ import { useState } from "react";
 import { updateCartQuantity } from "../api/productApi";
 import { addtocart } from "../api/productApi";
 import { ToastContainer, toast } from 'react-toastify';
+import { CiHeart } from "react-icons/ci";
+import { IoIosHeart } from "react-icons/io";
 
-const ProductCard = ({ products, isWishList }) => {
-  // const[allproduct, setAllProduct] = useState(products);
+const ProductCard = ({ products, isWishList , onDelete }) => {
   const [productList, setProductList] = useState([products]);
-  // const[wishlist, setWishlist] = useState(products);
   const navigate = useNavigate();
   const [cart, setCart] = useState({
     id:"",
     quantity:1
   });
   const handleCardClick = (productId) => {
-    navigate(`/product/productDetail/${productId}`);
+    navigate(`/product/${productId}`);
   };
 
   const handleDeleteWishlistItem = async (productId, e) => {
@@ -30,7 +30,10 @@ const ProductCard = ({ products, isWishList }) => {
     e.stopPropagation();
     try {
       await deleteWishList(productId);
-      setProductList(productList.filter((prod) => prod.productId !== productId));
+      setProductList((prevProductList) => prevProductList.filter((prod) => prod.productId !== productId));
+      if (onDelete) {
+        onDelete(productId);
+      }
     } catch (e) {
       console.log("Cannot delete product: ", e);
     }
@@ -99,6 +102,7 @@ const ProductCard = ({ products, isWishList }) => {
                   Out of Stock
                 </div>
               )}
+
               {isWishList && (
                 <div
                   onClick={(e) => handleDeleteWishlistItem(prod.productId, e)}
@@ -117,23 +121,8 @@ const ProductCard = ({ products, isWishList }) => {
               <p style={{color:"red"}}>MRP: ₹{prod?.price}</p>
               <span style={{fontSize:"15px"}}>{prod?.description.slice(0, 50)}...</span>
             </Card.Body>
-            {/* <Card.Footer class="d-flex"> */}
-              
-              {/* <input
-                type="number"
-                value={1}
-                onChange={(e) =>
-                  handleQuantityChange(
-                    prod.productId,
-                    parseInt(e.target.value) - (prod.quantity || 1)
-                  )
-                }
-                style={{ width: "60px", textAlign: "center", margin: "0 10px" }}
-                min="1"
-              /> */}
-           
               <button
-                className="custom-button p-2"
+                className="custom-button p-2 rounded-bottom"
                 disabled={prod.quantity === null}
                 style={{
                   backgroundColor:
@@ -145,10 +134,9 @@ const ProductCard = ({ products, isWishList }) => {
               >
                 {isWishList ? "Move to Bag" : "Add to cart"}
               </button>
-              <ToastContainer style={{color:"#FF407D"}} 
+              <ToastContainer
                 autoClose={2000}
                 /> 
-            {/* </Card.Footer> */}
           </Card>
         </Col>
       ))}

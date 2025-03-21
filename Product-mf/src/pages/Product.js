@@ -33,9 +33,6 @@ const Product = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
-  // const handleDeleteProduct = (productId) => {
-  //   setProducts(products.filter((prod) => prod.productId !== productId));
-  // };
 
   return (
     <div>
