@@ -1,5 +1,4 @@
 import React from "react";
-// import Navbar from "../components/Navbar";
 import { Carousel } from  "react-bootstrap"
 import { fetchTopProducts } from "../api/UserApi";
 import {useEffect, useState} from "react";
@@ -32,7 +31,7 @@ const Home = () =>{
 
     return(
       <div>
-        {/* <Navbar/> */}
+    
         <Carousel>
         <Carousel.Item>
           <img

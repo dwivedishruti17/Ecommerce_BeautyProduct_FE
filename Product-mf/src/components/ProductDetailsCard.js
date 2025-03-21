@@ -34,11 +34,10 @@ const ProductDetailsCard = ({ product }) => {
           ? toast("Item added to cart!")
           : toast("Please Sign in to add Items to your cart");
       }
-      // toast("Item added to cart!")
       await addtocart(cartData);
 
-      cartData();
     } catch (error) {
+      toast.error("Error adding item to cart");
       console.error("Error adding item to cart:", error);
     }
   };
@@ -52,6 +51,7 @@ const ProductDetailsCard = ({ product }) => {
       }
       await addToWishList(wishlistData);
     } catch (error) {
+      toast.error("Error adding item to wishlist");
       console.error("Error adding item to wishlist", error);
     }
   };
@@ -62,7 +62,6 @@ const ProductDetailsCard = ({ product }) => {
       quantity: parseInt(e.target.value),
     });
   };
-  console.log("Product quantity:", product.quantity);
 
   return (
     <div class="py-5 mx-4">
@@ -100,8 +99,6 @@ const ProductDetailsCard = ({ product }) => {
               MRP: ₹<span className="font-weight-bold">{product.price}</span>
             </span>
             <p>inclusive of all taxes</p>
-            {/* <span class="text-muted text-decoration-line-through">₹1999.99</span>  */}
-            {/* <span class="badge bg-danger ms-2">25% OFF</span> */}
           </div>
 
           <h3 class="mb-4">{product.description}</h3>
@@ -129,10 +126,6 @@ const ProductDetailsCard = ({ product }) => {
               className="custom-button"
               disabled={product.quantity === null}
               onClick={handleAddToCart}
-              // style={{
-              //   backgroundColor: product.quantity === null ? "#FF407D" : "",
-              //   borderColor: product.quantity === null ? "#FF407D" : "",
-              // }}
             >
               Add to Cart
             </button>
@@ -159,7 +152,6 @@ const ProductDetailsCard = ({ product }) => {
               <span>Free shipping on orders over ₹599</span>
             </div>
             <div class="d-flex align-items-center mb-2">
-              {/* <i class="fas fa-undo text-primary me-2"></i> */}
               <PiKeyReturnFill /> <span>14-day return policy</span>
             </div>
 

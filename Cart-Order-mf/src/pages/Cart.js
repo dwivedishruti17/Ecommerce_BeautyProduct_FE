@@ -2,7 +2,6 @@ import React, { useState , useEffect} from "react";
 import { Container, Row, Col, Card, Button, Form, InputGroup } from "react-bootstrap";
 import { BiTrash, BiShieldCheck } from "react-icons/bi";
 import { fetchCart } from "../api/CartAndOrderApi";
-import axios from 'axios';
 import { updateCartQuantity } from "../api/CartAndOrderApi";
 import { deleteCartItem } from "../api/CartAndOrderApi";
 import { useNavigate } from "react-router-dom";
@@ -142,7 +141,6 @@ const Cart = () => {
               
                <Button className="w-100 btn-custom" onClick={()=>{handleNavigate("/cart/address")}} >Proceed to Checkout</Button>
                <div className="text-center mt-2 d-flex justify-content-center gap-2"> 
-                 {/* <BiShieldCheck className="text-success" /> <small className="text-muted">Secure checkout</small> */}
                 </div>
            </Card>
             </Col>

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import server from "../../public/assets/server.gif";
 class ErrorBoundary extends Component {
   constructor(props) {
     super(props);

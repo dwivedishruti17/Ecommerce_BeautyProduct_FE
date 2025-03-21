@@ -11,7 +11,6 @@ import Login from "./pages/Login";
 import UserDetails from "./pages/UserDetails";
 import Register from "./pages/Register";
 import Cart from "Cart_Order_mf/Cart"
-import {useState, useEffect} from "react";
 import AllUser from "./pages/AllUser";
 
 

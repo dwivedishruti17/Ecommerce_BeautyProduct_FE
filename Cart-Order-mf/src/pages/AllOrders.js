@@ -8,6 +8,7 @@ import { OrderStatus } from "./Orders";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import {Row, Container, Col} from "react-bootstrap";
+import ErrorBoundary from "../components/ErrorBoundary";
 
 const getVariant = (status) => {
     switch (status) {
@@ -62,7 +63,11 @@ const AllOrders = () =>{
         <div>
         {userRole === 'ROLE_ADMIN' ? (
           <div className="d-flex">
+            <ErrorBoundary>
+
             <Sidebar />
+            </ErrorBoundary>
+           
             <div className="container">
               <Table striped bordered hover>
                 <thead>

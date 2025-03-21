@@ -4,6 +4,7 @@ import { fetchOrder, updateOrderStatus } from "../api/CartAndOrderApi";
 import Sidebar from "../components/Sidebar";
 import { useNavigate, useParams } from "react-router-dom";
 import { Card, Button, Container, Row, Col, ProgressBar } from "react-bootstrap";
+import ErrorBoundary from "../components/ErrorBoundary";
 
 export const OrderStatus = {
     PENDING: "PENDING",
@@ -15,10 +16,6 @@ export const OrderStatus = {
     [OrderStatus.COMPLETED]:100,
     [OrderStatus.CANCELLED]:100
   }
-//   const [orderStatus, setOrderStatus] = useState(order.OrderStatus);
-//   const handleSelect = (status) => {
-//     setOrderStatus(status);
-// };
 
 const getVariant = (status) => {
     switch (status) {
@@ -39,7 +36,7 @@ const Orders = () => {
     const[orderData, setOrderData] = useState( [] );
     const[orders , setOrders]= useState(orderData);
     const navigate = useNavigate();
-    // const [orderStatus, setOrderStatus] = useState(orders.items.OrderStatus);
+  
     const handleCardClick = (orderId) => {
         navigate(`/cart/order/${orderId}`);
       };
@@ -58,46 +55,13 @@ const Orders = () => {
         }
         fetchUserOrder();
     }, []);
-
-    // const handleStatusChange = async (orderId, newstatus)=>{
-        // const result = await updateOrderStatus(orderId, newstatus);
-        // if(result && result.orderStatus===newstatus){
-            // setOrderStatus(newstatus);
-    //         setOrders((prevOrders)=>
-    //         prevOrders.map((order)=>
-    //         order.id===orderId?{...order, orderStatus:newstatus}:order));
-    //     }
-    //     else{
-    //         alert("Failed to cancel the order")
-    //     }
-    // }
-
-    //  const handleCancelOrder = async(orderId) => {
-    //     const result = await updateOrderStatus(orderId, OrderStatus.CANCELLED);
-        
-    //     if(result && result.orderStatus===OrderStatus.CANCELLED){
-    //         setOrders((prevOrders)=>
-    //         prevOrders.map((order)=>
-    //         order.id===orderId?{...order, orderStatus:OrderStatus.CANCELLED}:order));
-    //     }
-    //     else{
-    //         alert("Failed to cancel the order")
-    //     }
-    //  }
-
   
     return(
         <div class="d-flex">  
-            {/* <div>
-               <Sidebar/>
-               </div>
-              <div>
-             {orders.map((order) => (
-            <Order key={order.id} order={order} handleStatusChange={handleStatusChange} />
-            
-          ))}
-          </div> */}
-          <Sidebar />
+           <ErrorBoundary>
+           <Sidebar />
+           </ErrorBoundary>
+         
       <Container className="mt-4">
         <h2 className="mb-4">Your Orders</h2>
         <Row>

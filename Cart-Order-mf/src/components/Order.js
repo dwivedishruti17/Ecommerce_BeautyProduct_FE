@@ -5,7 +5,6 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import { useState, useEffect } from "react";
 import {jwtDecode} from 'jwt-decode';
-import Sidebar from "./Sidebar";
 
 const Order = ({ order, handleStatusChange }) => {
   const [orderStatus, setOrderStatus] = useState(order.OrderStatus);

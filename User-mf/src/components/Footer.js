@@ -1,10 +1,6 @@
 import React from "react";
 import {
   FaEnvelope,
-  FaPhone,
-  FaInstagram,
-  FaFacebook,
-  FaTwitter,
 } from "react-icons/fa";
 
 

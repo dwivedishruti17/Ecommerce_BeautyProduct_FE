@@ -12,10 +12,8 @@ import {
 import { FaUser, FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 import Sidebar from "Cart_Order_mf/Sidebar";
 import { addAddress } from "../api/UserApi";
-// import Offcanvas from 'react-bootstrap/Offcanvas';
 import Modal from "react-bootstrap/Modal";
 import { Form } from "react-bootstrap";
-import AddAddress from "Cart_Order_mf/Sidebar";
 import { FaRegTrashAlt } from "react-icons/fa";
 import ErrorBoundary from "../components/ErrorBoundary";
 
@@ -75,7 +73,7 @@ const UserDetails = () => {
       }));
       
     } catch (error) {
-      // console.error("Failed to delete address:", error);
+      console.error("Failed to delete address:", error);
     }
   };
   
@@ -275,7 +273,6 @@ const UserDetails = () => {
                     >
                       Add New Address
                     </Button>
-                    {/* <AddAddress handleAddAddress={handleAddAddress} handleChange={handleChange} show={show} handleClose={handleClose}/> */}
                   </div>
                 </Card.Body>
               </Card>

@@ -1,30 +1,23 @@
 import React, {Suspense, lazy} from "react";
 import ReactDOM from "react-dom/client";
-// import { BrowserRouter } from "react-router-dom";
-// import ErrorBoundary from "./components/ErrorBoundary";
-import Sidebar from "Cart_Order_mf/Sidebar";
-
+import { BrowserRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 import "./index.css";
-// import ErrorBoundary from "./components/ErrorBoundary";
-const ErrorBoundary = lazy(()=>
-  import("Cart_Order_mf/Sidebar"));
+
 
 const App = () => {
   
   return (
     <>
-    <div> Helooooo</div> 
-     {/* <BrowserRouter> */}
+  
+    <ToastContainer autoClose={2000}/>
+     <BrowserRouter> 
+        
+      <ProductNavigations />
+ 
 
-      {/* <ProductNavigations /> */}
-        <ErrorBoundary>
-          <Suspense fallback={<div>Loading...</div>}>
-            <Sidebar />
-          </Suspense>
-        </ErrorBoundary>
-
-    {/* </BrowserRouter> */}
+     </BrowserRouter> 
     </>
   );
 };
@@ -33,4 +26,8 @@ if (!rootElement) throw new Error("Failed to find the root element");
 
 const root = ReactDOM.createRoot(rootElement);
 
-root.render(<App />);
+root.render
+(
+
+<App />
+);

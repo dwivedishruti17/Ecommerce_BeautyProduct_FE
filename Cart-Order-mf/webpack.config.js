@@ -74,7 +74,6 @@ module.exports = (_, argv) => ({
       filename: "remoteEntry.js",
       remotes: {},
       exposes: {
-
         "./Cart": "./src/CartAndOrderNavigations.jsx",
         "./Sidebar":"./src/components/Sidebar.js",
         "./AddAddress":"./src/components/AddAddress.js"

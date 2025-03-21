@@ -1,6 +1,5 @@
 import React from "react";
 import {Form, Button} from "react-bootstrap"
-import { Offcanvas } from "react-bootstrap";
 
 
 const AddAddress = ({handleAddAddress, handleChange}) =>{

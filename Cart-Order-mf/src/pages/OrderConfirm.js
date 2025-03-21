@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import Confetti from 'react-confetti'
 const OrderConfirm = () =>{
   const navigate = useNavigate();
-  // const { width, height } = useWindowSize()
     return(
       <div className="justify-content-center d-column">
       

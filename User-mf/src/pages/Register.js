@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { register } from "../api/UserApi";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
@@ -28,7 +28,6 @@ const Register = () => {
     e.preventDefault();
     const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-    // Check if the password matches the pattern
     if (!passwordPattern.test(formData.password)) {
       setPasswordError(
         "Password must be at least 8 characters long and contain both letters and numbers."

@@ -11,6 +11,7 @@ import { jwtDecode } from "jwt-decode";
 import {useState, useEffect} from "react";
 
 
+
 const Sidebar = () =>{
     const navigate = useNavigate();
     const[userRole, setUserRole] = useState('');
@@ -18,6 +19,23 @@ const Sidebar = () =>{
     .split("; ")
     .find((row) => row.startsWith("token="))
     ?.split("=")[1];
+
+  useEffect(() => {
+    if (typeof token === "string") {
+      const decodedToken = jwtDecode(token);
+      setUserRole(decodedToken.role);
+    }
+  }, [token]);
+
+  const handleLogout = () => {
+    if (token) {
+      document.cookie =
+        "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      setUserRole(null);
+      navigate("/login");
+    }
+  };
+
 
     useEffect(() => {
       if (typeof token === 'string'){
@@ -41,7 +59,7 @@ const Sidebar = () =>{
         </Nav.Item>
         <hr/>
         <Nav.Item>
-          <Nav.Link onClick={() => navigate("/userdetail")} className="text-dark fw-bold">
+          <Nav.Link onClick={handleLogout} className="text-dark fw-bold">
           <span style={{color:"#FF407D"}}><RiLogoutBoxLine size={28} className="m-2"/>Logout</span> 
           </Nav.Link>
         </Nav.Item>

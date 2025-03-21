@@ -53,15 +53,6 @@ const OrderDetails = () =>{
       fetchOrderDetails();
     }, [id]);
   
-    // const handleStatusChange = async (newStatus) => {
-    //   if (!order) return;
-    //   const result = await updateOrderStatus(order.id, newStatus);
-    //   if (result && result.orderStatus === newStatus) {
-    //     setOrder({ ...order, orderStatus: newStatus });
-    //   } else {
-    //     alert("Failed to update the order status");
-    //   }
-    // };
 
     const handleStatusChange = async (newStatus) => {
         if (!order) return;
@@ -105,9 +96,7 @@ const OrderDetails = () =>{
                   onClick={()=>handleStatusChange(order.id, OrderStatus.CANCELLED)}
                   disabled={order?.orderStatus===OrderStatus.CANCELLED}>Cancel Order</Button>)}</div> </div>
             <Card.Text>Status: {order?.orderStatus}</Card.Text>
-            {/* <ProgressBar now={order.orderStatus === OrderStatus.PENDING ? 50 : 100} variant={order.orderStatus === OrderStatus.CANCELLED ? "danger" : "success"} /> */}
             <ProgressBar now={statusMap[order?.orderStatus]} 
-                //   style={order.status === OrderStatus.CANCELLED?{color:"danger"}:{color:"#FF407D"}}/>
                 variant={order?.orderStatus===OrderStatus.CANCELLED?"danger":"success"}/>
 
             <Row>

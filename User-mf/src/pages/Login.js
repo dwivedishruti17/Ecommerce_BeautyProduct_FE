@@ -17,10 +17,6 @@ const Login = () => {
   }
   const navigate = useNavigate();
 
-  const handleNavigate = (path) => {
-    console.log(`Navigating to ${path}`);
-    navigate(path);
-  };
 
 
   const handleLogin = async (e) => {
@@ -28,7 +24,7 @@ const Login = () => {
     
     try {
       const data = await login(email, password);
-      // Cookies.set('token', data.jwtToken, { expires: 1 });
+     
       setSuccess("Login successful!");
       navigate("/");
       setError("");

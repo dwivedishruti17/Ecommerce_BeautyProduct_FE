@@ -1,18 +1,13 @@
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import { Button } from "react-bootstrap";
 import "./components.css";
 import { useNavigate } from "react-router-dom";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { deleteWishList } from "../api/productApi";
 import { useState } from "react";
-// import { updateCartQuantity } from "../../../Cart-Order-mf/src/api/CartAndOrderApi";
-import { updateCartQuantity } from "../api/productApi";
 import { addtocart } from "../api/productApi";
 import { ToastContainer, toast } from 'react-toastify';
-import { CiHeart } from "react-icons/ci";
-import { IoIosHeart } from "react-icons/io";
 
 const ProductCard = ({ products, isWishList , onDelete }) => {
   const [productList, setProductList] = useState([products]);

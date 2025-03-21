@@ -4,10 +4,8 @@ import { FaHome, FaPlus } from "react-icons/fa";
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { addAddress, fetchAddress } from "../api/CartAndOrderApi";
 import { fetchCart } from "../api/CartAndOrderApi";
-import { BiTrophy } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { createOrder } from "../api/CartAndOrderApi";
-// import logo from "./Assets/orderconfirm.png";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { deleteaddress } from "../api/CartAndOrderApi";
 import AddAddress from "../components/AddAddress";
@@ -18,7 +16,7 @@ const Address = () => {
     const [cartItems, setCartItems] = useState({ items: [] });
     const [show, setShow] = useState(false);
     const [addresses, setAddresses] = useState([]);
-    // const[loading, setLoading] = useState(false);
+   
     const[orderdata, setOrderData]= useState({
       addressId:null
     })
@@ -109,15 +107,8 @@ useEffect(()=>{
    const handlePlaceOrder = async(e) =>{
     e.preventDefault();
      try{
-      //  setLoading(true);
-      console.log("Current orderdata:", orderdata);
-      if(orderdata.addressId==null){
-        console.log("add address for placing an order");
-      }
       await createOrder(orderdata);
         navigate("/cart/orderconfirm");
-       
-    
      }
      catch(error){
       toast("Please Select Address")
@@ -141,11 +132,10 @@ const handleAddressSelection = (selectedAddressId) => {
     return (
       
      <div class="container" style={{marginBottom:"20px"}}>
-        {/* <ProgressBar now={50} variant="danger" animated label="Checkout" className="mb-4" /> */}
+       
         <h2><strong>Choose Address</strong></h2>
         <p class="text-muted">Detailed address will help our delivery partner reach your doorstep quickly</p>
         <Row>
-          {/* Address Selection */}
           <Col md={6}>
             <Card className="mb-4 ">
               <Card.Header className="btn-select" style={{backgroundColor:"#FF406D", color:"white"}}>Select Address</Card.Header>

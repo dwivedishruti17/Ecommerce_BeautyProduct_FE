@@ -3,7 +3,7 @@ import { Button, Container } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { Navbar as BootstrapNavbar, Nav } from "react-bootstrap";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import {useNavigate, useLocation } from "react-router-dom";
 import logo from "./Assets/logobeauty.png";
 import { VscAccount } from "react-icons/vsc";
 import Dropdown from "react-bootstrap/Dropdown";

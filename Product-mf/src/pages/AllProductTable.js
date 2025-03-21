@@ -8,7 +8,6 @@ import { getAllCategory } from "../api/productApi";
 import { getCategoryById } from "../api/productApi";
 import { FaEdit } from "react-icons/fa";
 import Sidebar from "Cart_Order_mf/Sidebar";
-// import ErrorBoundary from "../components/ErrorBoundary";
 const ErrorBoundary = lazy(()=>
     import("Cart_Order_mf/Sidebar"));
 
@@ -24,7 +23,6 @@ const AllProductTable = () => {
   const [productData, setProductData] = useState({ name: "", price: "", quantity: "" , description:"", imageUrl:"", subcategoryName:""});
   const [errors, setErrors] = useState({});
 
-    // const [show, setShow] = useState(false);
     const [filters, setFilters] = useState({
         minPrice: "",
         maxPrice: "",
@@ -42,9 +40,6 @@ const AllProductTable = () => {
         if (!productData.imageUrl) newErrors.imageUrl = 'Image URL is required';
         return newErrors;
       };
- 
-    // const handleClose = () => setShow(false);
-    // const handleShow = () => setShow(true);
  
     const fetchAllProducts = async () => {
         try {
@@ -150,7 +145,6 @@ if (e.target.name === 'subcategoryName') {
             <th>Price</th>
             <th>Quantity</th>
             <th>Description</th>
-            {/* <th>Image Url</th> */}
             <th>Actions</th>
           </tr>
         </thead>
@@ -209,7 +203,6 @@ value={productData.name}
         <Form.Control as="select" value={productData.subcategoryName} onChange={handleChange} name="subcategoryName"  
         style={{borderColor:"#FF407D"}}
         required>
-          {/* <option value="">Select SubCategory</option> */}
           {subcategories.map((subcategory) => (
             <option key={subcategory.id} value={subcategory.name}>
               {subcategory.name}

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchWishList } from "../api/productApi";
 import ProductCard from "../components/ProductCard";
-import { deleteWishList } from "../api/productApi";
 import wishlistlogo from "./Assets/wishlistlogo.jpg"
-// import { Button } from "react-bootstrap";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 
