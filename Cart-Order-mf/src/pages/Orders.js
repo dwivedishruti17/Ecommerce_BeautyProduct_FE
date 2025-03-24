@@ -73,7 +73,7 @@ const Orders = () => {
                   <Card.Text>Status: {order.orderStatus}</Card.Text>
                   <ProgressBar now={order.orderStatus === OrderStatus.PENDING ? 50 : 100} variant={order.orderStatus === OrderStatus.CANCELLED ? "danger" : "success"} />
                   <Card.Text><strong>Total Items:</strong> {order.items.length}</Card.Text>
-                  <Card.Text>Total: ₹{order.totalAmount}</Card.Text>
+                  <Card.Text>Total: ₹{order?.totalAmount>599?order?.totalAmount:order?.totalAmount+150}</Card.Text>
                   <Button
                     className="btn-custom"
                     onClick={() => handleCardClick(order.id)}

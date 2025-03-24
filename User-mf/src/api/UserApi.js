@@ -1,6 +1,4 @@
 import axios from 'axios';
-
-
 const API_BASE_URL = "http://localhost:8081/users";
 const API_PRODUCT_URL = "http://localhost:8080/products"
 
@@ -126,10 +124,10 @@ export const addAddress = async(addressdata) =>{
   }
  }
 
- export const fetchTopProducts = async (filters={}) => {
+ export const fetchTopProducts = async (filters={}, page=0, size=8) => {
   try {
-    const response = await axios.post(`${API_PRODUCT_URL}/filter`,filters,  {limit: 5 });
-    return response.data.slice(0,8);
+    const response = await axios.post(`${API_PRODUCT_URL}/filter?page=${page}&size=${size}`,filters);
+    return response.data;
   } catch (error) {
     console.error("Error fetching top products:", error);
     throw error;

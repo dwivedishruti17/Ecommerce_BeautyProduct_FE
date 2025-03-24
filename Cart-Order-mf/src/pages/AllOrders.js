@@ -32,8 +32,7 @@ const AllOrders = () =>{
             try{
                const data = await getAllOrder();
                setOrders(data);
-               console.log("dataaa", data);
-               console.log("orderrrrrsss", orders);
+              
             }
             catch{
                 console.log("cannot fetch orders")
@@ -65,7 +64,7 @@ const AllOrders = () =>{
           <div className="d-flex">
             <ErrorBoundary>
 
-            <Sidebar />
+ <Sidebar />
             </ErrorBoundary>
            
             <div className="container">
@@ -82,7 +81,7 @@ const AllOrders = () =>{
                   {orders?.map((order) => (
                     <tr key={order.id}>
                       <td onClick={() => navigate(`/cart/order/${order.id}`)}>{order.id}</td>
-                      <td>{order.totalAmount}</td>
+                      <td>{order?.totalAmount>599?order?.totalAmount:order?.totalAmount+150}</td>
                       <td>{order.orderDate}</td>
                       <td>
                         <Button variant={getVariant(order.orderStatus)}>

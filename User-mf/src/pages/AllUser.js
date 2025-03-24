@@ -1,8 +1,9 @@
 import Table from 'react-bootstrap/Table';
 import {useEffect, useState} from "react";
 import { fetchAllUser, updateRole } from '../api/UserApi';
-import { Button } from "react-bootstrap";
+import { Button, Container, Row, Col } from "react-bootstrap";
 import Sidebar from "Cart_Order_mf/Sidebar";
+import {jwtDecode} from "jwt-decode";
 
 const UserRole = {
   ADMIN: "ADMIN",
@@ -11,7 +12,7 @@ const UserRole = {
 }
 const AllUser= () => {
    const[alluserData, setAlluserData] = useState([]);
-
+   const[userRole, setUserRole] = useState('');
  
    useEffect(() => {
     async function AllUserData() {
@@ -24,6 +25,18 @@ const AllUser= () => {
     }
     AllUserData();
   }, []);
+
+  const token = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("token="))
+    ?.split("=")[1];
+
+  useEffect(() => {
+    if (typeof token === "string") {
+      const decodedToken = jwtDecode(token);
+      setUserRole(decodedToken.role);
+    }
+  }, [token]);
 
   const handleUpdateRole = async(userId) => {
     const result = await updateRole(userId, UserRole.ADMIN);
@@ -43,7 +56,9 @@ const AllUser= () => {
    
   
   return (
-    <div className='d-flex' >
+
+    <div>
+      {userRole==='ROLE_ADMIN'?(<div className='d-flex' >
  <Sidebar/>
       <div className='container'>
      
@@ -76,7 +91,18 @@ const AllUser= () => {
       </tbody>
     </Table>
     </div>
+    </div>):(
+       <Container className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+       <Row>
+         <Col className="text-center">
+            <h1><strong>You aren't allowed to access this Page!!</strong></h1>
+           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQONL8r02qaCFsLNDWI-bUdEo9wcBFZ25ybjw&s" alt="Unauthorized" />
+         </Col>
+       </Row>
+     </Container>
+    )}
     </div>
+    
   );
 }
 

@@ -65,7 +65,8 @@ const OrderDetails = () =>{
         }
       };
 
-    
+    const TotalAmount = order?.totalAmount;
+    const subtotal = TotalAmount<599? TotalAmount+150: TotalAmount;
   
     if (!order) return <p>Loading...</p>;
   
@@ -79,8 +80,7 @@ const OrderDetails = () =>{
            <div>{userRole==="ROLE_ADMIN"?(<DropdownButton
             id="dropdown-basic-button"
             title={order?.orderStatus}
-            disabled={order?.orderStatus===OrderStatus.CANCELLED}
-            variant={getVariant(orderStatus)}
+            variant={getVariant(order?.orderStatus)}
         >
             <Dropdown.Item onClick={() =>{ handleStatusChange(OrderStatus.PENDING); setOrderStatus(OrderStatus.PENDING) }} variant="warning">
                 Pending
@@ -94,9 +94,10 @@ const OrderDetails = () =>{
             </Dropdown.Item>
         </DropdownButton>):(<Button variant="danger" 
                   onClick={()=>handleStatusChange(order.id, OrderStatus.CANCELLED)}
-                  disabled={order?.orderStatus===OrderStatus.CANCELLED}>Cancel Order</Button>)}</div> </div>
+                  disabled={order?.orderStatus===(OrderStatus.CANCELLED || OrderStatus.COMPLETED)}>Cancel Order</Button>)}</div> </div>
             <Card.Text>Status: {order?.orderStatus}</Card.Text>
             <ProgressBar now={statusMap[order?.orderStatus]} 
+
                 variant={order?.orderStatus===OrderStatus.CANCELLED?"danger":"success"}/>
 
             <Row>
@@ -123,7 +124,7 @@ const OrderDetails = () =>{
                 <p>{order.address.area}, {order.address.city}, {order.address.state} - {order.address.pincode}</p>
                 <p>Phone: {order.address.phone}</p>
                 </div>
-                <div><h5>Total Price: ₹{order.totalAmount}</h5></div>
+                <div><h5>Total Price: ₹{subtotal}</h5></div>
                 </div>
             
           </Card.Footer>

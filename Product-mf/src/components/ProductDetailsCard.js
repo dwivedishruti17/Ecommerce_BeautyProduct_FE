@@ -24,18 +24,19 @@ const ProductDetailsCard = ({ product }) => {
     productId: product.id,
     quantity: 1,
   });
+
   const handleToggle = () => {
     setToggle(!toggle);
   };
   const handleAddToCart = async () => {
     try {
       {
+        
         token
           ? toast("Item added to cart!")
           : toast("Please Sign in to add Items to your cart");
       }
       await addtocart(cartData);
-
     } catch (error) {
       toast.error("Error adding item to cart");
       console.error("Error adding item to cart:", error);
@@ -51,7 +52,7 @@ const ProductDetailsCard = ({ product }) => {
       }
       await addToWishList(wishlistData);
     } catch (error) {
-      toast.error("Error adding item to wishlist");
+      
       console.error("Error adding item to wishlist", error);
     }
   };

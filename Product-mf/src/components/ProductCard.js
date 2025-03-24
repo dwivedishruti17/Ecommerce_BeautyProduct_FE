@@ -45,7 +45,7 @@ const ProductCard = ({ products, isWishList , onDelete }) => {
     try {
       {token?toast("Item added to Cart!"):toast("Please Sign in to add Items to your Cart")}
       const product = productList.find((prod) => prod.productId === productId);
-      const cartData = { productId, quantity: 1 }; 
+      const cartData = { productId, quantity:1 }; 
       await addtocart(cartData);
       setCart([...cart, { ...product, quantity: 1 }]);
       console.log("Product added to cart");
@@ -68,6 +68,7 @@ const ProductCard = ({ products, isWishList , onDelete }) => {
             }
             style={{ height: "320px", margin: "15px" , borderRadius:"0px"}}
             className="border radius-0 shadow-lg"
+            
           >
             <div
               style={{
@@ -118,16 +119,10 @@ const ProductCard = ({ products, isWishList , onDelete }) => {
             </Card.Body>
               <button
                 className="custom-button p-2 rounded-bottom"
-                disabled={prod.quantity === null}
-                style={{
-                  backgroundColor:
-                    prod.quantity === null || prod.quantity === 0
-                      ? "#FF407D"
-                      : ""
-                }}
+                disabled={prod.quantity === null || prod.quantity===0}
                 onClick={(e) => handleAddToCart(isWishList?prod.productId: prod.id, e)}
               >
-                {isWishList ? "Move to Bag" : "Add to cart"}
+                {isWishList ?( "Move to Bag" ): "Add to cart"}
               </button>
               <ToastContainer
                 autoClose={2000}

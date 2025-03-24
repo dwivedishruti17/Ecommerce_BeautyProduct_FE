@@ -81,7 +81,7 @@ useEffect(()=>{
         }
     }
     
-   const shippingCharge = 5;
+  
    let subtotal = 0;
 
    if (cartItems && cartItems.items && Array.isArray(cartItems.items)) {
@@ -92,6 +92,12 @@ useEffect(()=>{
        });
    } else {
        console.error('Error in fetching cart', cartItems);
+   }
+  let shippingCharge=0;
+   let total = subtotal;
+   if(subtotal<599){
+    total = 150+subtotal;
+    shippingCharge=150;
    }
 
    const handleDelete = async (addressId) => {
@@ -209,7 +215,7 @@ const handleAddressSelection = (selectedAddressId) => {
                   <hr />
                   <div className="d-flex justify-content-between">
                     <span className="fw-bold">Final Total</span>
-                    <strong className="text-danger">₹{subtotal + shippingCharge}</strong>
+                    <strong className="text-danger">₹{total}</strong>
                   </div>
                 </Accordion.Body>
               </Accordion.Item>

@@ -19,10 +19,10 @@ const getToken = () => {
   return config;
 };
 
-export const fetchProducts = async (filters={}) => {
+export const fetchProducts = async (filters={}, page=0, size=10) => {
   try {
 
-    const response = await axios.post(`${API_BASE_URL}/filter`, filters);
+    const response = await axios.post(`${API_BASE_URL}/filter?page=${page}&size=${size}`, filters);
     return response.data;
   } catch (error) {
     console.error("Error fetching products:", error);

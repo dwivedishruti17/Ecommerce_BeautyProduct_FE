@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import server from "../../public/assets/server.gif";
-class ErrorBoundary extends Component {
+class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
     this.state = { hasError: false };
@@ -20,7 +20,7 @@ class ErrorBoundary extends Component {
         <>
           <div className="d-flex justify-content-center">
            
-            This is my error boundary.
+            Error!!
           </div>
         </>
       );

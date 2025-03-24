@@ -20,6 +20,7 @@ const Cart = () => {
    useEffect(() => {
       fetchCart().then(data => {
           setCart(data);
+          console.log("cart items", cart);
       }).catch(error => {
           console.error('Error fetching cart data:', error);
       });
@@ -72,13 +73,14 @@ const Cart = () => {
        console.error('Error in fetching cart', cart);
    }
 
-   let totalAmount = 0;
+   let totalAmount = subtotal;
    if(subtotal<599){
-     totalAmount=150+subtotal
+     totalAmount= 150+subtotal;
    }
-  
+    
    return (
      <div className="container bg-light py-4">
+
        {cart?.items?.length === 0 ? (
             <div className="text-center">
                 <h4><strong>Your Shopping Bag is empty</strong></h4>

@@ -7,7 +7,6 @@ import { ToastContainer, toast } from "react-toastify";
 const Product = () => {
   const { subcategoryId } = useParams();
   const [subcategory, setSubCategory] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
 
@@ -19,12 +18,14 @@ const Product = () => {
         if (data) {
           setSubCategory(data);
         } else {
-          setError("Products not found");
+          toast.error("Subcategory not found");
+          
         }
       } catch (err) {
-        toast.error("Subcategory Not found");
+        toast.error("Error fetching subcategory");
         setError("Error fetching products");
       } finally {
+       
         setLoading(false);
       }
     };
@@ -32,7 +33,7 @@ const Product = () => {
     fetchCategory();
   }, [subcategoryId]);
 
-  if (loading) return <p>Loading...</p>;
+
   if (error) return <p>{error}</p>;
 
 
