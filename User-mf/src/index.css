@@ -67,3 +67,72 @@ html, body{
   font-size: 14px;
   width: 200px;
 }
+
+.bg-custom {
+  background-image: url('https://i.pinimg.com/736x/1c/06/80/1c06808a5ce60abb1fddec46c6e4b75b.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 60vh;
+  width: 100vw;
+}
+
+.card-custom {
+  max-width: 480px;
+  height: 450px;
+}
+
+.input-custom {
+  width: 425px;
+}
+
+.eye-icon {
+  margin-left: 4px;
+}
+
+
+
+.button-add-address {
+  background-color: #FF406D;
+  border-color: #FF406D;
+}
+
+.button-add-address:hover {
+  background-color: #FF85A2;
+  border-color: #FF85A2;
+}
+
+.container-full-height {
+  min-height: 100vh;
+  background-color: #FFF3F6;
+}
+
+.card-profile {
+  border-radius: 15px;
+  background: white;
+}
+
+.profile-initial-circle {
+  width: 80px;
+  height: 80px;
+  background-color: #FF85A2;
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.address-item-card {
+  background-color: #FFF0F5;
+  border-radius: 12px;
+  display: flex;
+}
+
+.button-outline-add {
+  border-radius: 25px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.button-outline-add:hover {
+  background-color: #FF85A2;
+}

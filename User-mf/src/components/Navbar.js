@@ -15,6 +15,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaListUl } from "react-icons/fa";
 import { IoIosPeople } from "react-icons/io";
 import { IoListCircleSharp } from "react-icons/io5";
+import {ToastContainer, toast} from "react-toastify";
 
 const Navbar = () => {
   const [categories, setCategories] = useState([]);
@@ -61,6 +62,7 @@ const Navbar = () => {
       document.cookie =
         "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       setUserRole(null);
+      toast.success("Logged Out Successfully!")
       handleNavigate("/login");
     }
   };
@@ -83,8 +85,10 @@ const Navbar = () => {
     <div>
       <div className="top-bar d-flex justify-content-between align-items-center">
         <div className="d-flex align-items-center">
-          <Image src={logo} className="logo" />
+        <ToastContainer autoClose={1000}/>
 
+          <Image src={logo} className="logo" />
+          
          
           <BootstrapNavbar expand="lg">
         <div className="d-flex justify-content-between align-items-center">

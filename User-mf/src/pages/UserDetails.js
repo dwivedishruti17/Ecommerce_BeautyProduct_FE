@@ -9,7 +9,7 @@ import {
   Spinner,
   Button,
 } from "react-bootstrap";
-import { FaUser, FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
+import {FaEnvelope, FaMapMarkerAlt} from "react-icons/fa";
 import Sidebar from "Cart_Order_mf/Sidebar";
 import { addAddress } from "../api/UserApi";
 import Modal from "react-bootstrap/Modal";
@@ -82,205 +82,161 @@ const UserDetails = () => {
   }, []);
 
   return (
-    <div style={{ position: "relative" }}>
-      <div
-        style={{
-          position: "absolute",
-          top: "0px",
-          left: "0px",
-          zIndex: "1100",
-        }}
+    <div>
+    <div>
+      <Modal
+        show={show}
+        onHide={handleClose}
+       
+        keyboard={false}
       >
-        <Modal
-          show={show}
-          onHide={handleClose}
-          placement="end"
-          backdrop="static"
-          keyboard={false}
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Add New Address</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form onSubmit={handleAddAddress}>
-              <Form.Group controlId="pincode" className="mb-3">
-                <Form.Label>Zip</Form.Label>
+        <Modal.Header closeButton>
+          <Modal.Title>Add New Address</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleAddAddress}>
+            <Form.Group controlId="pincode" className="mb-3">
+              <Form.Label>Zip</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Pincode"
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group controlId="area" className="mb-3">
+              <Form.Label>Address</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Address"
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+
+            <div className="d-flex gap-2">
+              <Form.Group controlId="city" className="mb-3">
+                <Form.Label>City</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Pincode"
+                  placeholder="City"
                   onChange={handleChange}
                   required
                 />
               </Form.Group>
 
-              <Form.Group controlId="area" className="mb-3">
-                <Form.Label>Address</Form.Label>
+              <Form.Group controlId="state" className="mb-3">
+                <Form.Label>State</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Address"
+                  placeholder="State"
                   onChange={handleChange}
                   required
                 />
               </Form.Group>
+            </div>
 
-              <div className="d-flex gap-2">
-                <Form.Group controlId="city" className="mb-3">
-                  <Form.Label>City</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="City"
-                    onChange={handleChange}
-                    required
-                  />
-                </Form.Group>
+            <Form.Group controlId="phone" className="mb-3">
+              <Form.Label>Contact</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Contact"
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
 
-                <Form.Group controlId="state" className="mb-3">
-                  <Form.Label>State</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="State"
-                    onChange={handleChange}
-                    required
-                  />
-                </Form.Group>
-              </div>
-
-              <Form.Group controlId="phone" className="mb-3">
-                <Form.Label>Contact</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Contact"
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-
-              <Button
-                type="submit"
-                className="w-100"
-                style={{ backgroundColor: "#FF406D", borderColor: "#FF406D" }}
-              >
-                Add Address
-              </Button>
-            </Form>
-          </Modal.Body>
-        </Modal>
-      </div>
-
-      <div
-        className="d-flex"
-        style={{ minHeight: "100vh", backgroundColor: "#FFF3F6" }}
-      >
-
-        <ErrorBoundary>
-         <Sidebar/>
-        </ErrorBoundary>
-        
-        <Container className="mt-4">
-          <Row className="justify-content-center">
-            <Col md={10} lg={8}>
-              <Card
-                className="shadow-sm border-0 p-4"
-                style={{ borderRadius: "15px", background: "white" }}
-              >
-                <Card.Body>
-                  <div className="text-center">
-                    <div
-                      className="d-inline-flex align-items-center justify-content-center rounded-circle"
-                      style={{
-                        width: "80px",
-                        height: "80px",
-                        backgroundColor: "#FF85A2",
-                        color: "white",
-                        fontSize: "32px",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {user.name ? user.name.charAt(0).toUpperCase() : "U"}
-                    </div>
-
-                    <h3 className="mt-3 text-dark">{user.name}</h3>
-                    <p className="text-muted">{user.email}</p>
-                  </div>
-
-                  <ListGroup variant="flush" className="mt-4">
-                    <ListGroup.Item className="py-3 border-0">
-                      <FaEnvelope className="me-2 text-danger" />
-                      <strong>Email:</strong> {user.email}
-                    </ListGroup.Item>
-                    <ListGroup.Item className="py-3 border-0">
-                      <FaMapMarkerAlt className="me-2 text-primary" />
-                      <strong>Address:</strong>
-                      {user.addresses?.length ? (
-                        <div>
-                          <div>
-                            <ul className="list-unstyled mt-3">
-                              {user.addresses.map((address) => (
-                                <li key={address.id} className="mb-3">
-                                  <Card
-                                    className="p-3 shadow-sm border-0"
-                                    style={{
-                                      backgroundColor: "#FFF0F5",
-                                      borderRadius: "12px",
-                                      display: "flex",
-                                    }}
-                                  >
-                                    <div className="d-flex justify-content-between">
-                                      <div>
-                                        <p className="mb-1">
-                                          <strong>{address.area},</strong>
-                                        </p>
-                                        <p className="mb-1">
-                                          {address.city} - {address.pincode}
-                                        </p>
-                                        <p className="mb-1">
-                                          {address.state}, India
-                                        </p>
-                                        <p className="mb-1">+91-{address.phone}</p>
-                                      </div>
-                                      <div>
-                                        <FaRegTrashAlt onClick={()=>handleDelete(address.id)} />
-                                      </div>
-                                    </div>
-                                  </Card>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        </div>
-                      ) : (
-                        <p className="mt-2 text-muted">No address found.</p>
-                      )}
-                    </ListGroup.Item>
-                  </ListGroup>
-
-                  <div className="text-center mt-4">
-                    <Button
-                      variant="outline-danger"
-                      className="px-4 py-2"
-                      style={{
-                        borderRadius: "25px",
-                        fontWeight: "bold",
-                        transition: "0.3s",
-                      }}
-                      onMouseOver={(e) =>
-                        (e.target.style.backgroundColor = "#FF85A2")
-                      }
-                      onMouseOut={(e) =>
-                        (e.target.style.backgroundColor = "transparent")
-                      }
-                      onClick={handleShow}
-                    >
-                      Add New Address
-                    </Button>
-                  </div>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-        </Container>
-      </div>
+            <Button
+              type="submit"
+              className="w-100 button-add-address"
+            >
+              Add Address
+            </Button>
+          </Form>
+        </Modal.Body>
+      </Modal>
     </div>
+
+    <div className="d-flex container-full-height">
+      <ErrorBoundary>
+        <Sidebar />
+      </ErrorBoundary>
+
+      <Container className="mt-4">
+        <Row className="justify-content-center">
+          <Col md={10} lg={8}>
+            <Card className="shadow-sm border-0 p-4 card-profile">
+              <Card.Body>
+                <div className="text-center">
+                  <div className="d-inline-flex align-items-center justify-content-center rounded-circle profile-initial-circle">
+                    {user.name ? user.name.charAt(0).toUpperCase() : "U"}
+                  </div>
+
+                  <h3 className="mt-3 text-dark">{user.name}</h3>
+                  <p className="text-muted">{user.email}</p>
+                </div>
+
+                <ListGroup variant="flush" className="mt-4">
+                  <ListGroup.Item className="py-3 border-0">
+                    <FaEnvelope className="me-2 text-danger" />
+                    <strong>Email:</strong> {user.email}
+                  </ListGroup.Item>
+                  <ListGroup.Item className="py-3 border-0">
+                    <FaMapMarkerAlt className="me-2 text-primary" />
+                    <strong>Address:</strong>
+                    {user.addresses?.length ? (
+                      <div>
+                        <div>
+                          <ul className="list-unstyled mt-3">
+                            {user.addresses.map((address) => (
+                              <li key={address.id} className="mb-3">
+                                <Card className="p-3 shadow-sm border-0 address-item-card">
+                                  <div className="d-flex justify-content-between">
+                                    <div>
+                                      <p className="mb-1">
+                                        <strong>{address.area},</strong>
+                                      </p>
+                                      <p className="mb-1">
+                                        {address.city} - {address.pincode}
+                                      </p>
+                                      <p className="mb-1">
+                                        {address.state}, India
+                                      </p>
+                                      <p className="mb-1">+91-{address.phone}</p>
+                                    </div>
+                                    <div>
+                                      <FaRegTrashAlt onClick={() => handleDelete(address.id)} />
+                                    </div>
+                                  </div>
+                                </Card>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="mt-2 text-muted">No address found.</p>
+                    )}
+                  </ListGroup.Item>
+                </ListGroup>
+
+                <div className="text-center mt-4">
+                  <Button
+                    variant="outline-danger"
+                    className="px-4 py-2 button-outline-add"
+                    onClick={handleShow}
+                  >
+                    Add New Address
+                  </Button>
+                </div>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+    </div>
+  </div>
   );
 };
 

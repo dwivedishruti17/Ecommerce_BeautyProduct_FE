@@ -6,6 +6,8 @@ import ProductCard from "Product_mf/ProductCard";
 
 const Home = () =>{
   const[products, setProducts]=useState([]);
+  const[page, setPage] = useState(0);
+  const[size]=useState(8);
   const [filters, setFilters] = useState({
     minPrice: "",
     maxPrice: "",
@@ -16,22 +18,19 @@ const Home = () =>{
     useEffect(()=>{
       const fetchProduct = async()=>{
         try{
-          const data = await fetchTopProducts(filters);
-          setProducts(data);
-          console.log("dataa", data);
-          console.log("home page product data", products);
+          const data = await fetchTopProducts(filters, page, size);
+          setProducts(data.content);
         }
         catch(error){
           console.log("cannot fetch error", error);
         }
       }
       fetchProduct();
-    },[]);
+    },[filters, page, size]);
 
 
     return(
       <div>
-    
         <Carousel>
         <Carousel.Item>
           <img
@@ -56,7 +55,7 @@ const Home = () =>{
         </Carousel.Item>
       </Carousel>
       <div className="align-items-center" style={{marginLeft:"70px", marginTop:"10px"}}>
-        <h2 style={{color:"#FF407D"}}><strong>What's new?</strong></h2>
+        <h2 style={{color:"#FF407D"}}><strong>Best Deals!</strong></h2>
       <ProductCard products={products} isWishlist={false}/>
       </div>
       

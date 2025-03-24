@@ -46,7 +46,7 @@ const Footer = () => {
     <h6 className="fw-bold" style={{padding:"10px"}}>About Us</h6>
     <p className="mb-1">Premium beauty products for your daily glow.</p>
     <p className="mb-1">
-          <FaEnvelope className="me-1" /> support@beautyshop.com
+          <FaEnvelope className="me-1" /> support@beautybliss.com
         </p>
       </div>
 </div>

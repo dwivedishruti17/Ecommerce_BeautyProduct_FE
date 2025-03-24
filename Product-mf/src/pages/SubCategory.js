@@ -17,8 +17,7 @@ const SubCategory = () => {
         if (data) {
           setCategory(data);
         } else {
-
-          setError("Category not found");
+          toast.error("Error fetching category")
         }
       } catch (err) {
         setError("Error fetching category");
@@ -38,7 +37,7 @@ const SubCategory = () => {
   return (
     
     <div className="container" style={{marginBottom:"200px"}}>
-     
+      <ToastContainer autoClose={2000}/>
       <h2>{category?.name}</h2>
       
       <ul>   

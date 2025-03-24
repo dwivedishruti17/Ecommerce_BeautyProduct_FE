@@ -40,7 +40,7 @@ const Filter = ({ show, handleClose, filters, handleFilterChange, applyFilters }
             </Form.Select>
           </Form.Group>
 
-          <Button variant="primary" onClick={applyFilters}>Apply Filters</Button>
+          <button className='btn-custom' onClick={applyFilters}>Apply Filters</button>
         </Form>
       </Offcanvas.Body>
     </Offcanvas>

@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { register } from "../api/UserApi";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
@@ -48,16 +48,8 @@ const Register = () => {
   };
   return (
     <div
-      class="bg-light d-flex align-items-center justify-content-center"
-      style={{
-        backgroundImage:
-          "url('https://i.pinimg.com/736x/1c/06/80/1c06808a5ce60abb1fddec46c6e4b75b.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        height: "60vh",
-        width: "100vw",
-      }}
+      class="bg-light d-flex align-items-center justify-content-center bg-custom"
+    
     >
       <div class="card shadow-lg w-100" style={{ maxWidth: "480px" }}>
         <div class="card-body">
